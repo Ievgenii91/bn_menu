@@ -1,0 +1,145 @@
+.main {
+  min-width: 400px;
+  max-width: 1024px;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+}
+.preHeader, .warning {
+  font-size: small;
+  text-align: center;
+  padding: 3px 5px;
+  background-color: #ee3e35;
+  color: #fbb03f;
+}
+.center {
+  text-align: center;
+}
+.header {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.side {
+  flex: 50%;
+  padding: 10px;
+  text-align: left;
+}
+
+.product {
+  cursor: pointer;
+}
+.price {
+  display: block;
+}
+.product .price {
+  margin-top: 5px;
+}
+.product:hover {
+  text-decoration: underline;
+  color: #7ad0e4;
+  transition: all 0.2s ease-in;
+}
+
+.attention {
+  color: #ee3e34;
+}
+
+.logo {
+  margin-bottom: 40px;
+}
+.divider {
+  height: 80px;
+}
+
+.oysters, .dogs, .cider, .coffee, .pie, .nalivka, .nonalco, .cesa, .punch, .avoska {
+  height: 50px;
+  line-height: 50px;
+  width: auto;
+  font-size: x-large;
+  transform: rotate(4deg);
+}
+.punch {
+  transform: rotate(0deg);
+}
+.avoska {
+  transform: rotate(7deg);
+}
+.cider {
+  transform: rotate(-4deg);
+}
+.warning {
+  margin: 50px 0;
+  transform: rotate(2deg);
+}
+.dogs {
+  padding-right: 0;
+  transform: rotate(-4deg);
+}
+.coffee {
+  transform: rotate(3deg);
+}
+.cesa {
+  transform: rotate(7deg);
+}
+.pie {
+  transform: rotate(5deg);
+}
+
+.oysters, .cider, .pie {
+  background-color: #ec3175;
+  color: #202f65;
+}
+
+.coffee, .nonalco, .cesa {
+  background-color: #ee3e35;
+  color: #fbb03f;
+}
+
+.dogs, .punch, .nalivka {
+  background-color: #7ad0e4;
+  color: #ec3175;
+}
+
+.avoska {
+  background-color: #fbb03f;
+  color: #202f65;
+}
+
+.oystersBlock, .cesaBlock, .dogBlock, .pieBlock, .coffeeBlock, .nalivkaBlock {
+  position: relative;
+}
+.cesaImage {
+  float: right;
+  position: relative;
+  right: -5px;
+}
+.dogImage {
+  position: relative;
+  top: -10px;
+  right: -10px;
+  float: right;
+}
+
+.brioshImage {
+  text-align: center;
+}
+.damn {
+  float: right;
+}
+.miniCart {  
+  background-color: #ec3175;
+  color: #202f65;
+  width: 100%;
+  font-weight: bold;
+  font-size: 20px;
+  position: fixed;
+  display: inline-block;
+  padding: 0 50px;
+  top: 0px;
+  line-height: 50px;
+  z-index: 1000;
+  display: none;
+}
