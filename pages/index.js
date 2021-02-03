@@ -1,8 +1,33 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import useSWR from 'swr'
 import styles from '../styles/Home.module.css';
 
+let trackEndpoint = '/api/user';
+
+const getData = async () => {
+  const fetchData = async () => {
+    window.localStorage.setItem('lastUpdated', new Date().toISOString());
+    const response = await fetch(trackEndpoint);
+    return await response.json();
+  }
+
+  let lastUpdated = window.localStorage.getItem('lastUpdated');  
+  if(lastUpdated) {
+    let currentTime = new Date(new Date().toISOString()).getTime();
+    if(currentTime - new Date(lastUpdated).getTime() > 300000) {      
+      return await fetchData();
+    } else {
+      return new Promise.resolve(false);
+    }    
+  } else {    
+    return await fetchData();
+  }  
+};
+
 export default function Home() {
+  const { data, error } = useSWR(trackEndpoint, getData, { dedupingInterval: 60000 });
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -62,21 +87,21 @@ export default function Home() {
           </div>
           <div className={styles.dogBlock}>          
             <h3 className={styles.dogs}>хот-доги.</h3>
-            <p className={styles.product}>
+            <div className={styles.product}>
               Хот-дог класік
               <span className={styles.price}>
                 <b>29₴</b>
               </span>
 
-              <span className={styles.dogImage}>
+              <div className={styles.dogImage}>
                 <Image                
                   src="/dog.png"
                   width={100}
                   height={100}
                   alt="хот дог класичний білий налив"
                 />
-              </span>
-            </p>
+              </div>
+            </div>
             <p className={styles.product}>
               Дабл-дог класік
               <span className={styles.price}>
@@ -84,13 +109,25 @@ export default function Home() {
               </span>
             </p>
             <p className={styles.product}>
-              Хот-дог у вершковому бріоші класік
+              Хот-дог у вершковому бріоші
               <span className={styles.price}>
                 <b>59₴</b>
               </span>          
             </p>
             <p className={styles.product}>
-              Дабл-дог у вершковому бріоші класік
+              Дабл-дог у вершковому бріоші
+              <span className={styles.price}>
+                <b>69₴</b>
+              </span>
+            </p>
+            <p className={styles.product}>
+              Гуакамоле дог
+              <span className={styles.price}>
+                <b>69₴</b>
+              </span>
+            </p>
+            <p className={styles.product}>
+              Хот-дог БЛЮ ЧІЗ
               <span className={styles.price}>
                 <b>69₴</b>
               </span>
@@ -98,8 +135,8 @@ export default function Home() {
             <div className={styles.brioshImage}>
               <Image
                 src="/briosh.png"
-                width={150}
-                height={150}
+                width={180}
+                height={180}
                 alt="хот дог у бріоші білий налив"
               />
             </div>
@@ -122,21 +159,21 @@ export default function Home() {
 
           <div className={styles.ciderBlock}>   
             <h3 className={styles.cider}>сидр.</h3>
-            <p className={styles.product}>
+            <div className={styles.product}>
               Яблучний
               <span className={styles.price}>
                 <b>29₴</b>
               </span>
 
-              <span className={styles.dogImage}>
-                <Image                
+              <div className={styles.dogImage}>
+                <Image          
                   src="/cider.png"
                   width={130}
                   height={130}
                   alt="сидр білий налив"
                 />
-              </span>
-            </p>
+              </div>
+            </div>
             <p className={styles.product}>
               Розе
               <span className={styles.price}>
@@ -207,23 +244,17 @@ export default function Home() {
           <div className={styles.coffeeBlock}>
             <h3 className={styles.coffee}>кава.</h3>
             <p className={styles.product}>
-              Еспрессо
+              Еспрессо/Американо
               <span className={styles.price}>
                 <b>9₴</b>
               </span>
-            </p>
-            <p className={styles.product}>
-              Американо
-              <span className={styles.price}>
-                <b> 9₴</b>
-              </span>
-            </p>
-            <p className={styles.product}>
+            </p>         
+            {/* <p className={styles.product}>
               Американо з молоком
               <span className={styles.price}>
                 <b> 14₴</b>
               </span>
-            </p>
+            </p> */}
             <p className={styles.product}>
               Лате
               <span className={styles.price}>
@@ -337,16 +368,8 @@ export default function Home() {
             </p>           
           </div>
 
-          <div className={styles.avoskaBlock}>          
-            <h3 className={styles.nonalco}>б/a.</h3>
-            <div className={styles.damn}>
-              <Image
-                src="/damn.png"
-                alt="БІЛИЙ НАЛИВ"
-                width={120}
-                height={250}
-              />
-            </div>
+          <div className={styles.nonalcoBlock}>          
+            <h3 className={styles.nonalco}>б/a.</h3>           
             <p className={styles.product}>
               Лимонад
               <span className={styles.price}>
