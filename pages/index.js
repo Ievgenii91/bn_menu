@@ -248,23 +248,17 @@ export default function Home() {
               <span className={styles.price}>
                 <b>9₴</b>
               </span>
-            </p>         
-            {/* <p className={styles.product}>
-              Американо з молоком
-              <span className={styles.price}>
-                <b> 14₴</b>
-              </span>
-            </p> */}
+            </p>          
             <p className={styles.product}>
               Лате
               <span className={styles.price}>
-                <b>19/29₴</b>
+                <b>19₴</b>
               </span>
             </p>
             <p className={styles.product}>
               Капучино
               <span className={styles.price}>
-                <b>19/39₴</b>
+                <b>19₴</b>
               </span>
             </p>
             <p className={styles.product}>
