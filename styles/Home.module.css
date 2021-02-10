@@ -23,7 +23,7 @@
 }
 .header {
   text-align: center;
-  margin-top: 30px;
+  padding: 0 20px;
 }
 
 .warning {
@@ -61,11 +61,6 @@
 .product .price {
   margin-top: 5px;
 }
-/* .product:hover {
-  text-decoration: underline;
-  color: #7ad0e4;
-  transition: all 0.2s ease-in;
-} */
 
 .attention {
   color: #ee3e34;
@@ -133,20 +128,13 @@
   background-color: #fbb03f;
   color: #202f65;
 }
-
-.oystersBlock, .cesaBlock, .dogBlock, .pieBlock, .coffeeBlock, .nalivkaBlock {
+.oystersBlock, .cesaBlock, .dogBlock, .pieBlock, .coffeeBlock, .nalivkaBlock, .ciderBlock, .punchBlock {
   position: relative;
 }
 .cesaImage {
   float: right;
   position: relative;
   right: -5px;
-}
-.dogImage {
-  position: relative;
-  top: -10px;
-  right: -10px;
-  float: right;
 }
 
 .brioshImage {
@@ -155,25 +143,80 @@
 .damn {
   float: right;
 }
-.nonalcoBlock {
-  min-height: 400px;
-  background-image: url('../public/damn.png');
-  background-position-x: right;
-  background-position-y: 70px;
-  background-size: 140px;
-  background-repeat: no-repeat;
-}
-.miniCart {  
-  background-color: #ec3175;
+
+.miniCart {
+  background-color: #fbb03f;
   color: #202f65;
   width: 100%;
   font-weight: bold;
   font-size: 20px;
   position: fixed;
-  display: inline-block;
-  padding: 0 50px;
   top: 0px;
   line-height: 50px;
   z-index: 1000;
-  display: none;
+  display: block;
+  height: 0;
+  overflow: hidden;
+
+	transition: height 0.5s linear;
+}
+.miniCart.show.swiped {
+  height: 50px;
+  transition: height 0.5s linear;
+}
+.orderWrapper {
+  min-width: 400px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+.miniCart.show {
+  height: auto;
+  transition: height 0.5s linear;
+}
+.rotatedBlock {
+  position: absolute;
+  z-index: 1;
+  width: 120%;
+  min-height: 200%;
+  background: #ec3175;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: -7%;
+}
+.orderProduct {
+  font-size: 16px;
+  line-height: 16px;
+  margin: 12px 0;
+}
+
+.pay {
+  font-family: 'Source Code Pro', monospace;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 30px;
+  font-weight: bold;
+  background-color: #202f65;
+  cursor: pointer;
+}
+.pay:hover, .pay:active, .pay:focus {
+  background-color: #ec3175;
+  transition:  background-color 0.3s ease-in;
+  outline: none;
+}
+
+.paymentBlock {
+  margin-bottom: 20px;
+}
+.cross {
+  display: inline-block;
+  position: relative;
+  top: 4px;
+  left: 10px;
+  cursor: pointer;
 }

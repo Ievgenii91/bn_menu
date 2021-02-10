@@ -1,0 +1,46 @@
+.product:hover {
+  text-decoration: underline;
+  color: #7ad0e4;
+  transition: all 0.2s ease-in;
+}
+.oystersBlock, .cesaBlock, .dogBlock, .pieBlock, .coffeeBlock, .nalivkaBlock, .ciderBlock, .avoskaBlock {
+  position: relative;
+}
+.nonalcoBlock {
+  min-height: 400px;
+  background-image: url('../public/damn.png');
+  background-position-x: right;
+  background-position-y: 70px;
+  background-size: 140px;
+  background-repeat: no-repeat;
+}
+.dogsImage, .ciderImage {
+  position: relative;
+  top: -10px;
+  right: -10px;
+  float: right;
+}
+.paragraph {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.ciderBlock .product:last-child {
+  color: #ee3e34;
+}
+.hidePrice .price {
+  display: none;
+}
+.product {
+  cursor: pointer;
+}
+.price {
+  display: block;
+}
+.product .price {
+  margin-top: 5px;
+}
+.cesaImage {
+  float: right;
+  position: relative;
+  right: -5px;
+}
