@@ -7,24 +7,19 @@
   text-align: center;
   display: flex;
 }
-.preHeader, .warning {
+.warning {
+  padding: 5px 10px;
+  font-size: 16px;
   font-size: small;
   text-align: center;
   padding: 3px 5px;
   background-color: #ee3e35;
   color: #fbb03f;
-} 
-.warning {
-  padding: 5px 10px;
-  font-size: 16px;
 }
 .center {
   text-align: center;
 }
-.header {
-  text-align: center;
-  padding: 0 20px;
-}
+
 
 .warning {
   animation: rotation 1.5s infinite linear;
@@ -152,7 +147,6 @@
   font-size: 20px;
   position: fixed;
   top: 0px;
-  line-height: 50px;
   z-index: 1000;
   display: block;
   height: 0;
@@ -163,6 +157,9 @@
 .miniCart.show.swiped {
   height: 50px;
   transition: height 0.5s linear;
+}
+.orderListWrap {
+  margin-bottom: 22px;
 }
 .orderWrapper {
   min-width: 400px;
@@ -181,15 +178,25 @@
   z-index: 1;
   width: 120%;
   min-height: 200%;
-  background: #ec3175;
+  background: #7ad0e4;
   transform: rotate(-45deg);
   left: 50%;
   top: -7%;
 }
+.rotatedBlock2 {
+  position: absolute;
+  z-index: 1;
+  width: 40%;
+  min-height: 200%;
+  background: #ec3175;
+  transform: rotate(-45deg);
+  left: 35%;
+  top: -100%;
+}
 .orderProduct {
   font-size: 16px;
   line-height: 16px;
-  margin: 12px 0;
+  margin: 4px 0;
 }
 
 .pay {
@@ -213,10 +220,62 @@
 .paymentBlock {
   margin-bottom: 20px;
 }
+
 .cross {
   display: inline-block;
   position: relative;
   top: 4px;
   left: 10px;
   cursor: pointer;
+}
+
+.styledInput {
+  width: 100%;
+  border: 2px solid #202f65;
+  line-height: 28px;
+  background: transparent;
+  outline: none;
+  padding: 2px 10px;
+  color: #202f65;
+  font-family: 'Source Code Pro', monospace;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 20px;
+}
+
+textarea.styledInput {
+  margin-top: 0 !important;
+  resize: none;
+}
+
+.notes::placeholder, .phone::placeholder {
+  color: #202f65
+}
+.notes {
+  margin-top: 12px;
+  line-height: 18px;
+  padding: 10px;
+}
+.validationError {
+  color: #ee3e35;
+  font-size: 13px;
+  display: inline-block;
+  margin-bottom: 11px;
+  margin-left: 12px;
+}
+.row.error {
+  margin-bottom: 0;
+}
+.styledInput.error {
+  border-color: #ee3e35;
+  color: #ee3e35;
+}
+.row {
+  margin: 0 0 12px 0;
+}
+
+@media screen and (max-width: 800px) {
+  .pay, .totalCount, .paymentBlock {
+    text-align: center;
+  }
 }

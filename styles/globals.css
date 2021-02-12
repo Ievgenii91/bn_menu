@@ -9,6 +9,7 @@ body {
 
 h1, h2, h3, h4, h5 {
   font-family: 'Anonymous Pro', monospace;
+  margin: 12px 0;
 }
 
 h3 {

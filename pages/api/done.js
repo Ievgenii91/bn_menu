@@ -17,26 +17,8 @@ const getHashes = (config) => {
 };
 
 export default async function handler(req, res) {
-  const { amount, description } = JSON.parse(req.body);
-  
-  const data = {
-      version: '3',
-      amount: amount,
-      public_key: PUBLIC_KEY,
-      private_key: PRIVATE_KEY,
-      action: 'pay',
-      currency: 'UAH',
-      language: 'uk',
-      description,
-      result_url: req.protocol + req.headers.host + '/api/done',
-      order_id: new Date().getTime() + ''
-  }
+  console.log(req.body, req.params, req.query, 'DONE');
 
-  try {
-    res.status(200).json(getHashes(data))
-  } catch (e) {
-    console.error(e);
-    res.end();
-  }
+  res.redirect(200, '/done');
 }
 

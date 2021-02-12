@@ -1,0 +1,12 @@
+.preHeader,
+.warning {
+  font-size: small;
+  text-align: center;
+  padding: 3px 5px;
+  background-color: #ee3e35;
+  color: #fbb03f;
+}
+.header {
+  text-align: center;
+  padding: 0 20px;
+}

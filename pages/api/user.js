@@ -5,8 +5,8 @@ let atlas_connection_uri;
 let cachedDb = null;
 
 export default async function handler(req, res) {
-  var uri = MONGODB_ATLAS_CLUSTER_URI;
-
+  var uri = MONGODB_ATLAS_CLUSTER_URI;  
+  const { zone } = req.query;
   if (!atlas_connection_uri) {
     atlas_connection_uri = uri;
     console.log('Receiving ATLAS CONNSTR');
@@ -14,7 +14,7 @@ export default async function handler(req, res) {
     console.log('CACHED CONNSTR');
   }
   return new Promise((resolve, reject) => {
-    processEvent({ agent: req.headers['user-agent'], ip: requestIp.getClientIp(req) }, (err) => {
+    processEvent({ agent: req.headers['user-agent'], ip: requestIp.getClientIp(req), zone }, (err) => {
       if(err) {
         res.status(200).end();
         reject();
