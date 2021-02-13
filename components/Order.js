@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css';
 import classNames from 'classnames';
 
 let paymentEndpoint = '/api/payment';
-const phoneNumLength = 10;
+const phoneNumLength = 9;
 
 export default function Order({ order, remove }) {
   const [data, setData] = useState();
@@ -43,8 +43,8 @@ export default function Order({ order, remove }) {
   };
 
   const transformPhoneNumber = (phone) => {
-    phone = phone.replace('+38(', '')
-    phone = phone.replace(/-/g, '')
+    phone = phone.replace('+380 (', '')
+    phone = phone.replace(/ /g, '')
     phone = phone.replace(')', '')
     return phone.trim()
   }
@@ -130,7 +130,7 @@ export default function Order({ order, remove }) {
           className={classNames(styles.styledInput, styles.phone, {
             [styles.error]: !isValidPhone,
           })}
-          mask="+38(999)-999-99-99" maskChar=" " />
+          mask="+380 (99) 999 99 99" maskChar=" " />
         {!isValidPhone && (
           <span className={styles.validationError}>
             Це поле обов'язкове для заповнення

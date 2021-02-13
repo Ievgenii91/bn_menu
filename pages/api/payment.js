@@ -18,8 +18,7 @@ const getHashes = (config) => {
 
 export default async function handler(req, res) {
   const { amount, description } = JSON.parse(req.body);
-  const host = req.protocol + req.headers.host;
-  console.log(host);
+  const host = req.headers.origin;
   const data = {
       version: '3',
       amount: amount,
