@@ -19,6 +19,6 @@ const getHashes = (config) => {
 export default async function handler(req, res) {
   console.log(req.body, req.params, req.query, 'DONE');
 
-  res.redirect(200, '/done');
+  res.end();
 }
 

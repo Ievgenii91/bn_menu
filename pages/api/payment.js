@@ -18,7 +18,8 @@ const getHashes = (config) => {
 
 export default async function handler(req, res) {
   const { amount, description } = JSON.parse(req.body);
-  
+  const host = req.protocol + req.headers.host;
+  console.log(host);
   const data = {
       version: '3',
       amount: amount,
@@ -28,7 +29,8 @@ export default async function handler(req, res) {
       currency: 'UAH',
       language: 'uk',
       description,
-      result_url: req.protocol + req.headers.host + '/api/done',
+      result_url: host + '/done',
+      server_url: host + '/api/done',
       order_id: new Date().getTime() + ''
   }
 
