@@ -5,7 +5,10 @@
   height: auto;
   margin: 0 auto;
   text-align: center;
-  display: flex;
+  display: flex;  
+}
+.main.column {
+  flex-direction: column;
 }
 .warning {
   padding: 5px 10px;
@@ -211,6 +214,9 @@
   background-color: #202f65;
   cursor: pointer;
 }
+.pay.done {
+  background-color: #ec3175;
+}
 .pay:hover, .pay:active, .pay:focus {
   background-color: #ec3175;
   transition:  background-color 0.3s ease-in;
@@ -278,4 +284,15 @@ textarea.styledInput {
   .pay, .totalCount, .paymentBlock {
     text-align: center;
   }
+}
+
+.finishText {
+  margin: 0 auto;
+  padding: 20px 50px;
+  text-align: center;
+  font-size: 2em;
+  align-items: flex-end;
+}
+.highlight {
+  color: #ee3e35;
 }

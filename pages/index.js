@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { io } from 'socket.io-client';
 import useSWR from 'swr';
-import Link from 'next/link';
 import classNames from 'classnames';
 import { useSwipeable } from 'react-swipeable';
 import StaticMenu from '../components/StaticMenu';
@@ -9,6 +10,7 @@ import Header from '../components/Header';
 import PageHead from '../components/PageHead';
 import styles from '../styles/Home.module.css';
 import Order from '../components/Order';
+import notifyMe from '../services/notification';
 
 const { NEXT_PUBLIC_EXTERNAL_API, ENTITY_CLIENT_ID } = process.env;
 const trackEndpoint = '/api/user?zone=';
@@ -28,7 +30,10 @@ const getData = async () => {
   let lastUpdated = storage.getItem('lastUpdated');
   if (lastUpdated) {
     let currentTime = new Date(new Date().toISOString()).getTime();
-    if (currentTime - new Date(lastUpdated).getTime() > QR_SCAN_FREQUENCY_TIMEOUT) {
+    if (
+      currentTime - new Date(lastUpdated).getTime() >
+      QR_SCAN_FREQUENCY_TIMEOUT
+    ) {
       return await fetchData();
     } else {
       return new Promise.resolve(false);
@@ -41,8 +46,9 @@ const getData = async () => {
 export default function Home({ products }) {
   const { data, error } = useSWR(trackEndpoint, getData, {
     dedupingInterval: 60000,
-  });  
+  });
   const orderRef = useRef();
+  const router = useRouter();
   const [order, setOrder] = useState(null);
   const [swiped, setSwiped] = useState(false);
   const [pos, setPos] = useState(0);
@@ -62,6 +68,24 @@ export default function Home({ products }) {
       }
     },
   });
+
+  useEffect(() => {
+    notifyMe();
+
+    const socket = io(process.env.NEXT_PUBLIC_EXTERNAL_API, {
+      query: {
+        clientId: process.env.NEXT_PUBLIC_ENTITY_CLIENT_ID,
+      },
+    });
+
+    socket.on('connect', () => {
+      socket.on('finish_order', (data) => {
+        localStorage.setItem('finished', data.id);
+        notifyMe('Забирай замовлення на видачі!');
+        router.push('done');
+      });
+    });
+  }, []);
 
   const isConnectedToApi = () => {
     return !!NEXT_PUBLIC_EXTERNAL_API;
@@ -101,9 +125,11 @@ export default function Home({ products }) {
     if (!order.selectedItems.length) {
       setOrder(null);
     } else {
-      setOrder({
-        ...order,
-      });
+      setOrder([
+        {
+          ...order,
+        },
+      ]);
     }
   };
 
@@ -115,7 +141,7 @@ export default function Home({ products }) {
   return (
     <div className={styles.container}>
       <PageHead />
-      <Header showHint={isConnectedToApi()} />   
+      <Header showHint={isConnectedToApi()} />
       {order && (
         <div
           className={classNames(styles.miniCart, {
@@ -137,7 +163,7 @@ export default function Home({ products }) {
           <DynamicMenu products={products} selectProduct={selectProduct} />
         )}
       </main>
-      <footer className={styles.main}>
+      {/* <footer className={styles.main}>
         <Link href="/about">
           <a>Про БІЛИЙ НАЛИВ</a>
         </Link>
@@ -147,7 +173,7 @@ export default function Home({ products }) {
         <Link href="/about">
           <a>Угода</a>
         </Link>
-      </footer>
+      </footer> */}
     </div>
   );
 }
@@ -158,7 +184,6 @@ export async function getStaticProps() {
       `${NEXT_PUBLIC_EXTERNAL_API}/api/products/getPublicProducts?clientId=${ENTITY_CLIENT_ID}`
     );
     const data = await res.json();
-
     if (!data) {
       return {
         notFound: true,

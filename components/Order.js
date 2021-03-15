@@ -21,11 +21,13 @@ export default function Order({ order, remove }) {
 
   useEffect(() => {
     if (data && signature) {
+      localStorage.clear();
       localStorage.setItem('order', JSON.stringify({
         phone,
         clientName,
         note,
-        date: new Date().getTime() + ''
+        date: new Date().getTime() + '',
+        products: order.selectedItems,
       }))
       form.current.submit();
     }

@@ -29,10 +29,9 @@ export default async function handler(req, res) {
       language: 'uk',
       description,
       result_url: host + '/done',
-      server_url: host + '/api/done',
+      // server_url: host + '/api/result',
       order_id: new Date().getTime() + ''
   }
-
   try {
     res.status(200).json(getHashes(data))
   } catch (e) {
@@ -40,4 +39,3 @@ export default async function handler(req, res) {
     res.end();
   }
 }
-

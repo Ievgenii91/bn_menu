@@ -9,9 +9,6 @@ export default async function handler(req, res) {
   const { zone } = req.query;
   if (!atlas_connection_uri) {
     atlas_connection_uri = uri;
-    console.log('Receiving ATLAS CONNSTR');
-  } else {
-    console.log('CACHED CONNSTR');
   }
   return new Promise((resolve, reject) => {
     processEvent({ agent: req.headers['user-agent'], ip: requestIp.getClientIp(req), zone }, (err) => {
