@@ -181,7 +181,7 @@ export default function Home({ products }) {
 export async function getStaticProps() {
   if (NEXT_PUBLIC_EXTERNAL_API) {
     const res = await fetch(
-      `${NEXT_PUBLIC_EXTERNAL_API}/api/products/getPublicProducts?clientId=${ENTITY_CLIENT_ID}`
+      `${NEXT_PUBLIC_EXTERNAL_API}/api/product/all?clientId=${ENTITY_CLIENT_ID}`
     );
     const data = await res.json();
     if (!data) {
@@ -192,7 +192,7 @@ export async function getStaticProps() {
 
     return {
       props: {
-        products: data.products,
+        products: data,
       },
     };
   } else {

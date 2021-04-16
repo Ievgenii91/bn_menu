@@ -29,7 +29,7 @@ export default async function handler(req, res) {
       language: 'uk',
       description,
       result_url: host + '/done',
-      // server_url: host + '/api/result',
+      server_url: host + '/api/result',
       order_id: new Date().getTime() + ''
   }
   try {
