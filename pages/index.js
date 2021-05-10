@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { io } from 'socket.io-client';
 import useSWR from 'swr';
@@ -17,153 +17,163 @@ const trackEndpoint = '/api/user?zone=';
 const QR_SCAN_FREQUENCY_TIMEOUT = 60000; // 1 min
 
 const getData = async () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const storage = window.localStorage;
-  const zone = urlParams.get('zone');
+	const urlParams = new URLSearchParams(window.location.search);
+	const storage = window.localStorage;
+	const zone = urlParams.get('zone');
 
-  const fetchData = async () => {
-    storage.setItem('lastUpdated', new Date().toISOString());
-    const response = await fetch(trackEndpoint + zone);
-    return await response.json();
-  };
+	const fetchData = async () => {
+		storage.setItem('lastUpdated', new Date().toISOString());
+		const response = await fetch(trackEndpoint + zone);
+		return await response.json();
+	};
 
-  let lastUpdated = storage.getItem('lastUpdated');
-  if (lastUpdated) {
-    let currentTime = new Date(new Date().toISOString()).getTime();
-    if (
-      currentTime - new Date(lastUpdated).getTime() >
-      QR_SCAN_FREQUENCY_TIMEOUT
-    ) {
-      return await fetchData();
-    } else {
-      return new Promise.resolve(false);
-    }
-  } else {
-    return await fetchData();
-  }
+	let lastUpdated = storage.getItem('lastUpdated');
+	if (lastUpdated) {
+		let currentTime = new Date(new Date().toISOString()).getTime();
+		if (
+			currentTime - new Date(lastUpdated).getTime() >
+			QR_SCAN_FREQUENCY_TIMEOUT
+		) {
+			return await fetchData();
+		} else {
+			return new Promise.resolve(false);
+		}
+	} else {
+		return await fetchData();
+	}
 };
 
 export default function Home({ products }) {
-  const { data, error } = useSWR(trackEndpoint, getData, {
-    dedupingInterval: 60000,
-  });
-  const orderRef = useRef();
-  const router = useRouter();
-  const [order, setOrder] = useState(null);
-  const [swiped, setSwiped] = useState(false);
-  const [pos, setPos] = useState(0);
-  const handlers = useSwipeable({
-    onSwiped: () => {
-      setPos(0);
-    },
-    onSwipedDown: () => {
-      setSwiped(false);
-    },
-    onSwipedUp: () => {
-      setSwiped(true);
-    },
-    onSwiping: ({ deltaY, dir }) => {
-      if (dir === 'Up') {
-        setPos(deltaY);
-      }
-    },
-  });
+	// TODO refactor useSwr, it not suits here
+	const { data, error } = useSWR(trackEndpoint, getData, {
+		dedupingInterval: 60000,
+	});
+	const orderRef = useRef();
+	const router = useRouter();
+	const [order, setOrder] = useState(null);
+	const [swiped, setSwiped] = useState(false);
+	const [pos, setPos] = useState(0);
+	const handlers = useSwipeable({
+		onSwiped: () => {
+			setPos(0);
+		},
+		onSwipedDown: () => {
+			setSwiped(false);
+		},
+		onSwipedUp: () => {
+			setSwiped(true);
+		},
+		onSwiping: ({ deltaY, dir }) => {
+			if (dir === 'Up') {
+				setPos(deltaY);
+			}
+		},
+	});
 
-  useEffect(() => {
-    notifyMe();
+	useEffect(() => {
+		notifyMe();
 
-    const socket = io(process.env.NEXT_PUBLIC_EXTERNAL_API, {
-      query: {
-        clientId: process.env.NEXT_PUBLIC_ENTITY_CLIENT_ID,
-      },
-    });
+		const socket = io(process.env.NEXT_PUBLIC_EXTERNAL_API, {
+			query: {
+				clientId: process.env.NEXT_PUBLIC_ENTITY_CLIENT_ID,
+			},
+		});
 
-    socket.on('connect', () => {
-      socket.on('finish_order', (data) => {
-        localStorage.setItem('finished', data.id);
-        notifyMe('Забирай замовлення на видачі!');
-        router.push('done');
-      });
-    });
-  }, []);
+		socket.on('connect', () => {
+			socket.on('finish_order', (data) => {
+				localStorage.setItem('finished', data.id);
+				notifyMe('Забирай замовлення на видачі!');
+				router.push('done');
+			});
+		});
+	}, []);
 
-  const isConnectedToApi = () => {
-    return !!NEXT_PUBLIC_EXTERNAL_API;
-  };
+	const isConnectedToApi = () => {
+		return !!NEXT_PUBLIC_EXTERNAL_API;
+	};
 
-  const selectProduct = (product) => {
-    setOrder((order) => {
-      let dup = null;
-      let products = [];
-      if (order) {
-        products = order.selectedItems.map((v) => {
-          if (v.id === product.id) {
-            dup = true;
-            v.count = (v.count || 1) + 1;
-          }
-          return {
-            ...v,
-          };
-        });
-      }
-      if (!dup) {
-        products.push({
-          ...product,
-          count: 1,
-        });
-      }
-      return {
-        ...order,
-        selectedItems: products,
-      };
-    });
-  };
+	const selectProduct = useCallback(
+		(product) => {
+			setOrder((order) => {
+				let dup = null;
+				let products = [];
+				if (order) {
+					products = order.selectedItems.map((v) => {
+						if (v.id === product.id) {
+							dup = true;
+							v.count = (v.count || 1) + 1;
+						}
+						return {
+							...v,
+						};
+					});
+				}
+				if (!dup) {
+					products.push({
+						...product,
+						count: 1,
+					});
+				}
+				return {
+					...order,
+					selectedItems: products,
+				};
+			});
+		},
+		[setOrder]
+	);
 
-  const remove = (product) => {
-    const index = order.selectedItems.findIndex((v) => v.id === product.id);
-    order.selectedItems.splice(index, 1);
-    if (!order.selectedItems.length) {
-      setOrder(null);
-    } else {
-      setOrder([
-        {
-          ...order,
-        },
-      ]);
-    }
-  };
+	const remove = useCallback(
+		(product) => {
+			const index = order.selectedItems.findIndex((v) => v.id === product.id);
+			order.selectedItems.splice(index, 1);
+			if (!order.selectedItems.length) {
+				setOrder(null);
+			} else {
+				setOrder([
+					{
+						...order,
+					},
+				]);
+			}
+		},
+		[setOrder, order]
+	);
 
-  const refPassthrough = (el) => {
-    handlers.ref(el);
-    orderRef.current = el;
-  };
+	const refPassthrough = useCallback(
+		(el) => {
+			handlers.ref(el);
+			orderRef.current = el;
+		},
+		[handlers, orderRef]
+	);
 
-  return (
-    <div className={styles.container}>
-      <PageHead />
-      <Header showHint={isConnectedToApi()} />
-      {order && (
-        <div
-          className={classNames(styles.miniCart, {
-            [styles.show]: !!order,
-            [styles.swiped]: swiped,
-          })}
-          style={{ top: pos + 'px' }}
-          ref={refPassthrough}
-          {...handlers}
-        >
-          <div className={styles.rotatedBlock}></div>
-          <div className={styles.rotatedBlock2}></div>
-          <Order order={order} remove={remove} />
-        </div>
-      )}
-      <main className={styles.main}>
-        {!isConnectedToApi() && <StaticMenu />}
-        {isConnectedToApi() && (
-          <DynamicMenu products={products} selectProduct={selectProduct} />
-        )}
-      </main>
-      {/* <footer className={styles.main}>
+	return (
+		<div className={styles.container}>
+			<PageHead />
+			<Header showHint={isConnectedToApi()} />
+			{order && (
+				<div
+					className={classNames(styles.miniCart, {
+						[styles.show]: !!order,
+						[styles.swiped]: swiped,
+					})}
+					style={{ top: pos + 'px' }}
+					ref={refPassthrough}
+					{...handlers}
+				>
+					<div className={styles.rotatedBlock}></div>
+					<div className={styles.rotatedBlock2}></div>
+					<Order order={order} remove={remove} />
+				</div>
+			)}
+			<main className={styles.main}>
+				{!isConnectedToApi() && <StaticMenu />}
+				{isConnectedToApi() && (
+					<DynamicMenu products={products} selectProduct={selectProduct} />
+				)}
+			</main>
+			{/* <footer className={styles.main}>
         <Link href="/about">
           <a>Про БІЛИЙ НАЛИВ</a>
         </Link>
@@ -174,30 +184,30 @@ export default function Home({ products }) {
           <a>Угода</a>
         </Link>
       </footer> */}
-    </div>
-  );
+		</div>
+	);
 }
 
 export async function getStaticProps() {
-  if (NEXT_PUBLIC_EXTERNAL_API) {
-    const res = await fetch(
-      `${NEXT_PUBLIC_EXTERNAL_API}/api/product/all?clientId=${ENTITY_CLIENT_ID}`
-    );
-    const data = await res.json();
-    if (!data) {
-      return {
-        notFound: true,
-      };
-    }
+	if (NEXT_PUBLIC_EXTERNAL_API) {
+		const res = await fetch(
+			`${NEXT_PUBLIC_EXTERNAL_API}/api/product/all?clientId=${ENTITY_CLIENT_ID}`
+		);
+		const { data } = await res.json();
+		if (!data) {
+			return {
+				notFound: true,
+			};
+		}
 
-    return {
-      props: {
-        products: data,
-      },
-    };
-  } else {
-    return {
-      props: {},
-    };
-  }
+		return {
+			props: {
+				products: data,
+			},
+		};
+	} else {
+		return {
+			props: {},
+		};
+	}
 }
