@@ -3,19 +3,27 @@ import Image from 'next/image';
 import useSWR from 'swr';
 import styles from '../styles/Home.module.css';
 
-let trackEndpoint = '/api/user';
+const trackEndpoint = '/api/user?zone=';
+const QR_SCAN_FREQUENCY_TIMEOUT = 60000; // 1 min
 
 const getData = async () => {
+	const urlParams = new URLSearchParams(window.location.search);
+	const storage = window.localStorage;
+	const zone = urlParams.get('zone');
+
 	const fetchData = async () => {
-		window.localStorage.setItem('lastUpdated', new Date().toISOString());
-		const response = await fetch(trackEndpoint);
+		storage.setItem('lastUpdated', new Date().toISOString());
+		const response = await fetch(trackEndpoint + zone);
 		return await response.json();
 	};
 
-	let lastUpdated = window.localStorage.getItem('lastUpdated');
+	let lastUpdated = storage.getItem('lastUpdated');
 	if (lastUpdated) {
 		let currentTime = new Date(new Date().toISOString()).getTime();
-		if (currentTime - new Date(lastUpdated).getTime() > 300000) {
+		if (
+			currentTime - new Date(lastUpdated).getTime() >
+			QR_SCAN_FREQUENCY_TIMEOUT
+		) {
 			return await fetchData();
 		} else {
 			return new Promise.resolve(false);
