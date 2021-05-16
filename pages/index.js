@@ -257,21 +257,15 @@ export default function Home() {
 						<p className={styles.product}>
 							Еспрессо/Американо
 							<span className={styles.price}>
-								<b>9₴</b>
-							</span>
-						</p>
-						<p className={styles.product}>
-							Лате
-							<span className={styles.price}>
 								<b>19₴</b>
 							</span>
 						</p>
 						<p className={styles.product}>
-							Капучино
+							Лате/Капучино
 							<span className={styles.price}>
-								<b>19₴</b>
+								<b>29₴</b>
 							</span>
-						</p>
+						</p>		
 						<p className={styles.product}>
 							Додай молока
 							<span className={styles.price}>
