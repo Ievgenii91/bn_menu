@@ -57,6 +57,7 @@ export default function Home() {
 			<div className={styles.header}>
 				<Image
 					className={styles.logo}
+					priority={true}
 					src="/logo.png"
 					alt="БІЛИЙ НАЛИВ"
 					width={350}
@@ -71,6 +72,7 @@ export default function Home() {
 						<div className={styles.center}>
 							<Image
 								src="/oyster.png"
+								priority={true}
 								width={160}
 								height={160}
 								alt="устриці білий налив"
