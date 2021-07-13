@@ -392,27 +392,26 @@ export default function Home() {
 							</span>
 						</p>
 					</div>
-				
-					<div>
-						<h4>Сигаретне меню/сигарети</h4>
-						**вміст смоли/нікотину, мг
+				</div>
+				<div>
+					<h4>Сигаретне меню/сигарети</h4>
+					**вміст смоли/нікотину, мг
 
-						<p>WINSTON BLUE 6/0,5**</p>
-						<p>WINSTON EXPAND DUO 5/0,4**</p>
-						<p>WINSTON XSTYLE BLUE 6/0,5**</p>
-						<p>WINSTON XSTYLE SILVER 4/0,3**</p>
-						<p>WINSTON XSPRESSION FRESH 5/0,4**</p>
-						<p>WINSTON XSPRESSION PURPLE 5/0,4**</p>
+					<p>WINSTON BLUE 6/0,5**</p>
+					<p>WINSTON EXPAND DUO 5/0,4**</p>
+					<p>WINSTON XSTYLE BLUE 6/0,5**</p>
+					<p>WINSTON XSTYLE SILVER 4/0,3**</p>
+					<p>WINSTON XSPRESSION FRESH 5/0,4**</p>
+					<p>WINSTON XSPRESSION PURPLE 5/0,4**</p>
 
-					<p>	WINSTON XSPRESSION SPARKLING MIX 5/0,4**</p>
-						<p>WINSTON XSTYLE DUO GREEN 5/0,4**</p>
-						<p>CAMEL BLUE 6/0,5**</p>
-						<p>SOBRANIE GOLD 3/0,3**</p>
-						<p>SOBRANIE EVOLVE GOLD 4/0,4**</p>
+				<p>	WINSTON XSPRESSION SPARKLING MIX 5/0,4**</p>
+					<p>WINSTON XSTYLE DUO GREEN 5/0,4**</p>
+					<p>CAMEL BLUE 6/0,5**</p>
+					<p>SOBRANIE GOLD 3/0,3**</p>
+					<p>SOBRANIE EVOLVE GOLD 4/0,4**</p>
 
-						*Інформація про ціни на тютюнові вироби доступна в місці торгівлі
-						Відповідно до закону України №71-VIII від 28.12.2014, продаж об'єктами господарювання роздрібної торгівлі підакцизних товарів, на які встановлюються максимально роздрібні ціни, не може здійснюватись за цінами, вищими за максимально роздрібні ціни, збільшені на суму акцизного податку з роздрібної торгівлі підакцизних товарів.
-					</div>
+					*Інформація про ціни на тютюнові вироби доступна в місці торгівлі
+					Відповідно до закону України №71-VIII від 28.12.2014, продаж об'єктами господарювання роздрібної торгівлі підакцизних товарів, на які встановлюються максимально роздрібні ціни, не може здійснюватись за цінами, вищими за максимально роздрібні ціни, збільшені на суму акцизного податку з роздрібної торгівлі підакцизних товарів.
 				</div>
 			</main>
 		</div>
