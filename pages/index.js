@@ -349,7 +349,7 @@ export default function Home() {
 						<p className={styles.product}>
 							MAX:
 							<div>пляшка сидру 0,7л</div>
-							<div>2 пляшки наливки 0,2л ы 0,5л</div>
+							<div>2 пляшки наливки 0,2л і 0,5л</div>
 							<span className={styles.price}>
 								<b>299₴</b>
 							</span>
@@ -374,10 +374,11 @@ export default function Home() {
 							</span>
 						</p>
 						<p className={styles.product}>
-							Ігристе вино б/а 150/750мл
-							<span className={styles.price}>
-								<b>59₴/259₴</b>
-							</span>
+							Ігристе вино б/а
+							<div className={styles.attention}>
+								<div>150 мл - 49₴</div>
+								<div>750 мл - 259₴</div>
+							</div>
 						</p>
 						<p className={styles.product}>
 							Бонаква
