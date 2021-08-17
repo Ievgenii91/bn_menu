@@ -374,6 +374,12 @@ export default function Home() {
 							</span>
 						</p>
 						<p className={styles.product}>
+							Ігристе вино б/а 150/750мл
+							<span className={styles.price}>
+								<b>59₴/259₴</b>
+							</span>
+						</p>
+						<p className={styles.product}>
 							Бонаква
 							<span className={styles.price}>
 								<b>39₴</b>
