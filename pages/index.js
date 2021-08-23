@@ -191,7 +191,13 @@ export default function Home() {
 							</span>
 						</p>
 						<p className={styles.product}>
-							Сухий
+							Груша
+							<span className={styles.price}>
+								<b>39₴</b>
+							</span>
+						</p>
+						<p className={styles.product}>
+							Медуза
 							<span className={styles.price}>
 								<b>49₴</b>
 							</span>
@@ -202,8 +208,14 @@ export default function Home() {
 								<b>49₴</b>
 							</span>
 						</p>
+						<p className={styles.product}>
+							Пляшечка 0,33 яблуко або смородина
+							<span className={styles.price}>
+								<b>39₴</b>
+							</span>
+						</p>
 						<div className={styles.attention}>
-							<b>Бери одразу пляшку 99₴</b>
+							<b>Бери одразу пляшку 750мл за 99₴ (Яблуко, Розе, Сухий)</b>
 							<div>Не соромся міксувати з наливками</div>
 						</div>
 					</div>
