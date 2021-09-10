@@ -319,13 +319,13 @@ export default function Home() {
 						<h3 className={styles.pie}>пиріг.</h3>
 						<p className={styles.attention}>По олдскулу</p>
 						<p className={styles.product}>
-							З куркою
+							З куркою та сиром
 							<span className={styles.price}>
 								<b>69₴</b>
 							</span>
 						</p>
 						<p className={styles.product}>
-							З яблуком
+							З вишнею
 							<span className={styles.price}>
 								<b>69₴</b>
 							</span>
