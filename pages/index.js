@@ -321,13 +321,13 @@ export default function Home() {
 						<p className={styles.product}>
 							З куркою
 							<span className={styles.price}>
-								<b>39₴</b>
+								<b>69₴</b>
 							</span>
 						</p>
 						<p className={styles.product}>
 							З яблуком
 							<span className={styles.price}>
-								<b>39₴</b>
+								<b>69₴</b>
 							</span>
 						</p>
 						<div className={styles.warning}>
