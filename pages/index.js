@@ -336,16 +336,6 @@ export default function Home() {
 						</div>
 					</div>
 
-					<div className={styles.punchBlock}>
-						<h3 className={styles.punch}>сендвіч.</h3>
-						<p className={styles.product}>
-							Сендвіч з норвезьким оселедцем (голландський)
-							<span className={styles.price}>
-								<b>59₴</b>
-							</span>
-						</p>
-					</div>
-
 					<p style={{ height: '20px' }}></p>
 
 					<div className={styles.avoskaBlock}>
