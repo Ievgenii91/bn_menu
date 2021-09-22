@@ -203,12 +203,6 @@ export default function Home() {
 							</span>
 						</p>
 						<p className={styles.product}>
-							Фраголіно
-							<span className={styles.price}>
-								<b>49₴</b>
-							</span>
-						</p>
-						<p className={styles.product}>
 							Пляшечка 0,33 яблуко або смородина
 							<span className={styles.price}>
 								<b>39₴</b>
