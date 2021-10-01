@@ -10,11 +10,11 @@ export default function Home() {
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 				<link
 					href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap"
-					rel="stylesheet"
+					rel="preload" as="style" 
 				/>
 				<link
 					href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300&display=swap"
-					rel="stylesheet"
+					rel="preload" as="style" 
 				></link>
 				<link rel="icon" href="/favicon.ico" />
 				<script
