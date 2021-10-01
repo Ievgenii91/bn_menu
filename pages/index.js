@@ -1,43 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import useSWR from 'swr';
 import styles from '../styles/Home.module.css';
 
-const trackEndpoint = '/api/user?zone=';
-const QR_SCAN_FREQUENCY_TIMEOUT = 60000; // 1 min
-
-const getData = async () => {
-	const urlParams = new URLSearchParams(window.location.search);
-	const storage = window.localStorage;
-	const zone = urlParams.get('zone');
-
-	const fetchData = async () => {
-		storage.setItem('lastUpdated', new Date().toISOString());
-		const response = await fetch(trackEndpoint + zone);
-		return await response.json();
-	};
-
-	let lastUpdated = storage.getItem('lastUpdated');
-	if (lastUpdated) {
-		let currentTime = new Date(new Date().toISOString()).getTime();
-		if (
-			currentTime - new Date(lastUpdated).getTime() >
-			QR_SCAN_FREQUENCY_TIMEOUT
-		) {
-			return await fetchData();
-		} else {
-			return new Promise.resolve(false);
-		}
-	} else {
-		return await fetchData();
-	}
-};
-
 export default function Home() {
-	const { data, error } = useSWR(trackEndpoint, getData, {
-		dedupingInterval: 60000,
-	});
-
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -52,6 +17,22 @@ export default function Home() {
 					rel="stylesheet"
 				></link>
 				<link rel="icon" href="/favicon.ico" />
+				<script
+					async
+					src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA}`}
+				/>
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GA}', {
+              page_path: window.location.pathname,
+            });
+          `,
+					}}
+				/>
 			</Head>
 			{/* <div className={styles.preHeader}>Привіт, грішнику! Усі наіменування клікабельні, можеш робити замовлення прямо з сайту.</div> */}
 			<div className={styles.header}>
@@ -81,13 +62,19 @@ export default function Home() {
 						<p className={styles.product}>
 							Fine de Claire #3 з лимоном
 							<span className={styles.price}>
-								<b>29₴</b>
+								<b>39₴</b>
 							</span>
 						</p>
 						<p className={styles.product}>
 							Голландський аффінаж #3 з лимоном
 							<span className={styles.price}>
-								<b>39₴</b>
+								<b>49₴</b>
+							</span>
+						</p>
+						<p className={styles.product}>
+							Святий Патрік #2
+							<span className={styles.price}>
+								<b>59₴</b>
 							</span>
 						</p>
 						<p className={styles.product}>
@@ -102,7 +89,7 @@ export default function Home() {
 						<div className={styles.product}>
 							Хот-дог класік
 							<span className={styles.price}>
-								<b>29₴</b>
+								<b>39₴</b>
 							</span>
 							<div className={styles.dogImage}>
 								<Image
@@ -116,7 +103,7 @@ export default function Home() {
 						<p className={styles.product}>
 							Дабл-дог класік
 							<span className={styles.price}>
-								<b>39₴</b>
+								<b>49₴</b>
 							</span>
 						</p>
 						<p className={styles.product}>
@@ -134,11 +121,11 @@ export default function Home() {
 						<p className={styles.product}>
 							Гуакамоле дог
 							<span className={styles.price}>
-								<b>69₴</b>
+								<b>59₴</b>
 							</span>
 						</p>
 						<p className={styles.product}>
-							Хот-дог БЛЮ ЧІЗ
+							Дабл гуакамоле дог
 							<span className={styles.price}>
 								<b>69₴</b>
 							</span>
@@ -273,7 +260,7 @@ export default function Home() {
 							<span className={styles.price}>
 								<b>29₴</b>
 							</span>
-						</p>		
+						</p>
 						<p className={styles.product}>
 							Додай молока
 							<span className={styles.price}>
@@ -298,13 +285,13 @@ export default function Home() {
 						<p className={styles.product}>
 							Кесадилья
 							<span className={styles.price}>
-								<b>49₴</b>
+								<b>59₴</b>
 							</span>
 						</p>
 						<p className={styles.product}>
 							Кесадилья XXL
 							<span className={styles.price}>
-								<b>59₴</b>
+								<b>69₴</b>
 							</span>
 						</p>
 					</div>
@@ -322,6 +309,12 @@ export default function Home() {
 							З вишнею
 							<span className={styles.price}>
 								<b>69₴</b>
+							</span>
+						</p>
+						<p className={styles.product}>
+							Кальцоне з куркою або з грибами
+							<span className={styles.price}>
+								<b>39₴</b>
 							</span>
 						</p>
 						<div className={styles.warning}>
