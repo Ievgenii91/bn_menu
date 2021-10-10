@@ -31,7 +31,7 @@ export default function Home() {
 				  t.src=v;s=b.getElementsByTagName(e)[0];
 				  s.parentNode.insertBefore(t,s)}(window, document,'script',
 				  'https://connect.facebook.net/en_US/fbevents.js');
-				  fbq('init', '6105494199525716');
+				  fbq('init', `${process.env.NEXT_PUBLIC_PIXEL}`);
 				  fbq('track', 'PageView');
 				</script>
 				<noscript><img height="1" width="1" style="display:none"
