@@ -206,6 +206,12 @@ export default function Home() {
 							</span>
 						</p>
 						<p className={styles.product}>
+							Вишня
+							<span className={styles.price}>
+								<b>39₴</b>
+							</span>
+						</p>
+						<p className={styles.product}>
 							Медуза
 							<span className={styles.price}>
 								<b>49₴</b>
