@@ -141,13 +141,13 @@ export default function Home() {
 							</span>
 						</p>
 						<p className={styles.product}>
-							Гуакамоле дог
+							Гуакамоле дог / дабл
 							<span className={styles.price}>
-								<b>59₴</b>
+								<b>59 / 69₴</b>
 							</span>
 						</p>
 						<p className={styles.product}>
-							Дабл гуакамоле дог
+							Корн дог
 							<span className={styles.price}>
 								<b>69₴</b>
 							</span>
@@ -164,15 +164,21 @@ export default function Home() {
 							Хочеш вега ? Скажи касиру і ми приготуємо
 						</p>
 						<p className={styles.product}>
-							Хот-дог блючіз
+							Хот-дог блючіз / дабл
+							<span className={styles.price}>
+								<b>59 / 69₴</b>
+							</span>
+						</p>
+						<p className={styles.product}>
+							Шейк дог
 							<span className={styles.price}>
 								<b>59₴</b>
 							</span>
 						</p>
 						<p className={styles.product}>
-							Дабл-дог блючіз
+							Surf&Turf Дог
 							<span className={styles.price}>
-								<b>69₴</b>
+								<b>99₴</b>
 							</span>
 						</p>
 					</div>
@@ -182,7 +188,7 @@ export default function Home() {
 						<div className={styles.product}>
 							Яблучний
 							<span className={styles.price}>
-								<b>29₴</b>
+								<b>39₴</b>
 							</span>
 							<div className={styles.dogImage}>
 								<Image
@@ -208,12 +214,6 @@ export default function Home() {
 						<p className={styles.product}>
 							Вишня
 							<span className={styles.price}>
-								<b>39₴</b>
-							</span>
-						</p>
-						<p className={styles.product}>
-							Медуза
-							<span className={styles.price}>
 								<b>49₴</b>
 							</span>
 						</p>
@@ -224,7 +224,7 @@ export default function Home() {
 							</span>
 						</p>
 						<div className={styles.attention}>
-							<b>Бери одразу пляшку 750мл за 99₴ (Яблуко, Розе, Сухий)</b>
+							<b>Бери одразу пляшку 750мл за 129₴ (Яблуко, Розе, Сухий)</b>
 							<div>Не соромся міксувати з наливками</div>
 						</div>
 					</div>
@@ -242,7 +242,7 @@ export default function Home() {
 						<p className={styles.product}>
 							Яблуко
 							<span className={styles.price}>
-								<b>29₴</b>
+								<b>39₴</b>
 							</span>
 						</p>
 						<p className={styles.product}>
@@ -266,7 +266,7 @@ export default function Home() {
 							<br></br>
 							<div className={styles.attention}>
 								Бери одразу пляшку:
-								<div>0.2л - 79₴</div>
+								<div>0.2л - 99₴</div>
 								<div>0.5л - 215₴</div>
 							</div>
 						</div>
@@ -391,19 +391,19 @@ export default function Home() {
 							</span>
 						</p>
 						<p className={styles.product}>
-							Бонаква
+							Бонаква (газована та негазована)
+							<span className={styles.price}>
+								<b>29₴</b>
+							</span>
+						</p>
+						<p className={styles.product}>
+							Кола, Спрайт, Фанта, Burn
 							<span className={styles.price}>
 								<b>39₴</b>
 							</span>
 						</p>
 						<p className={styles.product}>
-							Кола
-							<span className={styles.price}>
-								<b>39₴</b>
-							</span>
-						</p>
-						<p className={styles.product}>
-							Чай
+							Чай (обліпиха яблуко, смородина з базеліком)
 							<span className={styles.price}>
 								<b>29₴</b>
 							</span>
