@@ -1,0 +1,58 @@
+.price {
+	color: #c73734;
+}
+.name,
+.heading {
+	text-transform: uppercase;
+}
+.name {
+	font-size: 14px;
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	margin: 15px 0 0;
+}
+.heading {
+	font-size: 20px;
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+.backed {
+	background-color: #e7ac5b;
+	border-radius: 20px;
+	border: none !important;
+}
+.block {
+	width: 100%;
+	border-radius: 20px;
+	padding: 10px 20px;
+	margin: 10px 0;
+}
+.block .description {
+	font-size: 14px;
+	font-weight: normal;
+	margin: 0;
+}
+
+.block .new {
+	position: absolute;
+	left: -40px;
+	top: -35px;
+}
+.love {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+.red {
+	color: #c73734;
+}
+.bordered {
+	border: 1px solid #c73734;
+	box-shadow: 0px 0px 5px #c73734;
+}
+.description {
+	font-weight: normal;
+	font-size: 14px;
+}
