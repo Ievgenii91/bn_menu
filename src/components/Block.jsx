@@ -25,9 +25,8 @@ const Block = ({ data }) => {
 				)}
 				{data.products.map((model) => {
 					return (
-						<>
+						<div key={model.id}>
 							<p
-								key={model.id}
 								className={classNames(
 									styles.name,
 									...getClasses(model.additionalText)
@@ -57,7 +56,7 @@ const Block = ({ data }) => {
 								<span className={styles.price}> {model.price}₴</span>
 							</p>
 							<span className={styles.description}>{model.description}</span>
-						</>
+						</div>
 					);
 				})}
 			</section>
