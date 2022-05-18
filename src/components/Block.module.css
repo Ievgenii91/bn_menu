@@ -23,6 +23,7 @@
 	border: none !important;
 }
 .block {
+	position: relative;
 	width: 100%;
 	border-radius: 20px;
 	padding: 10px 20px;
@@ -34,14 +35,14 @@
 	margin: 0;
 }
 
-.block .new {
+.name .new {
 	position: absolute;
 	left: -40px;
 	top: -35px;
 }
-.love {
+.name .love {
 	position: absolute;
-	left: 0px;
+	left: -30px;
 	top: 0px;
 }
 

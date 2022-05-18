@@ -3,8 +3,8 @@ import Block from './Block';
 const Content = ({ blocks }) => {
 	return (
 		<>
-			{blocks.map((model, index) => (
-				<Block data={model} key={index} />
+			{blocks.map((model) => (
+				<Block data={model} key={model.id} />
 			))}
 		</>
 	);

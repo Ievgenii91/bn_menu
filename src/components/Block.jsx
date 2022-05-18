@@ -15,7 +15,7 @@ const Block = ({ data }) => {
 				className={classNames(styles.block, ...getClasses(data.classes))}
 			>
 				<h2 className={styles.heading}>
-					{data.blockName}{' '}
+					{data.blockName}
 					{data.classes.includes('fresh') && (
 						<Image src={'/asset_4.png'} alt="fresh" width="20" height="20" />
 					)}
@@ -23,11 +23,11 @@ const Block = ({ data }) => {
 				{data.description && (
 					<p className={styles.description}>{data.description}</p>
 				)}
-				{data.products.map((model, index) => {
+				{data.products.map((model) => {
 					return (
 						<>
 							<p
-								key={index}
+								key={model.id}
 								className={classNames(
 									styles.name,
 									...getClasses(model.additionalText)
